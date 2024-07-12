@@ -16,7 +16,7 @@ const presentation: Presentation = {
 	title: "Hi, I’m Ziyi Li 👋",
 	profile: "/pro.JPG",
 	description:
-		"I'm a final-year Computer Science student at the University of Leeds. I am familiar with *web development* and working on *distributed systems*. I love fitness, photography, and jazz hiphop.",
+		"I'm a final-year Computer Science student at the University of Leeds. I'm familiar with *web development* and working on *distributed systems*. I love fitness, photography, and jazz hiphop.",
 
 	socials: [
 		{
