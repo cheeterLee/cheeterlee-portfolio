@@ -1,0 +1,153 @@
+---
+import { getCollection } from "astro:content"
+import { Image, Picture } from "astro:assets"
+
+import Layout from "@/layouts/Layout.astro"
+import SocialLinks from "@/components/SocialLinks.astro"
+import Link from "@/components/shared/Link.astro"
+import convertAsteriskToStrongTag from "@/utils/convertAsteriskToStrongTag"
+
+import presentation from "@/data/presentation"
+import experiences from "@/data/projects"
+import ExperienceCard from "@/components/ExperienceCard.astro"
+import ProjectCard from "@/components/ProjectCard.astro"
+
+type Project = {
+	name: string
+	time: string
+	description: string
+	link: string
+	tech: string[]
+}
+
+export const projects: Project[] = [
+	{
+		name: "RPC Framework",
+		time: "2024",
+		description:
+			"Remote Procedure Call framework for microservices, based on Spring Boot and ZooKeeper.",
+		link: "https://github.com/cheeterLee/rpc",
+		tech: ["Java", "Spring Boot", "ZooKeepr", "Netty"],
+	},
+	{
+		name: "Track25",
+		time: "2024",
+		description:
+			"Fullstack WebGIS application to view geolocation data, with a full CI/CD pipeline including unit testing and E2E testing.",
+		link: "https://github.com/cheeterLee/track25",
+		tech: ["TypeScript", "NextJS", "Jest", "Cypress", "PostgreSQL"],
+	},
+	{
+		name: "Compiler",
+		time: "2024",
+		description: "Compiler written in C to compile the Jack programming language into VM code.",
+		link: "https://github.com/cheeterLee/compiler",
+		tech: ["C"],
+	},
+	{
+		name: "Workout Buddy",
+		time: "2023",
+		description: "Workout tracker web app with data visualization features.",
+		link: "https://github.com/cheeterLee/workout-buddy2",
+		tech: ["React, D3.js, MongoDB, Node.js, Nest.js"]
+	}, 
+	{
+		name: "Archive",
+		time: "2023",
+		description: "NFT market place on Goerli test network",
+		link: "https://github.com/cheeterLee/archive2",
+		tech: ["Three.js", "Solidity", "Wagmi"]
+	}
+]
+
+---
+
+<Layout>
+	<main class="flex w-full flex-col gap-16">
+		<article
+			class="flex flex-col gap-8 md:flex-row-reverse md:justify-end md:gap-12"
+		>
+			{
+				presentation.profile && (
+					<Image
+						src={presentation.profile}
+						class="w-1/4 self-center rounded-full"
+						alt="Your Profile"
+						width="200"
+						height="200"
+					/>
+				)
+			}
+
+			<div class="flex flex-col gap-8">
+				<h1 class="text-3xl text-neutral-100">
+					{presentation.title}
+				</h1>
+
+				<h2
+					class="w-auto max-w-[60ch] leading-6"
+					set:html={convertAsteriskToStrongTag(
+						presentation.description
+					)}
+				/>
+
+				<SocialLinks />
+			</div>
+		</article>
+
+		<article class="flex flex-col gap-8">
+			<header class="flex w-full flex-row justify-between gap-2">
+				<h3 class="text-lg text-neutral-100">Experiences</h3>
+			</header>
+			<section class="flex flex-col gap-4">
+				{
+					experiences.length !== 0 &&
+						experiences.map((e) => <ExperienceCard {...e} />)
+				}
+			</section>
+		</article>
+
+		<article class="flex flex-col gap-8">
+			<header class="flex w-full flex-row justify-between gap-2">
+				<h3 class="text-lg text-neutral-100">Recent Projects</h3>
+				<Link
+					href="/projects"
+					label="See all projects"
+					isUnderline
+					target="_self"
+				/>
+			</header>
+
+			<section class="grid grid-cols-1 md:grid-cols-2 gap-2">
+				{
+					projects.length !== 0 &&
+						projects
+							.slice(0, 2)
+							.map((p) => (
+								<ProjectCard
+									name={p.name}
+									time={p.time}
+									description={p.description}
+									link={p.link}
+									tech={p.tech}
+								/>
+							))
+				}
+			</section>
+		</article>
+
+		<article class="flex flex-col gap-8">
+			<header class="flex w-full flex-row justify-between gap-2">
+				<h3 class="text-lg text-neutral-100">Get in touch</h3>
+			</header>
+			<p>
+				Email me at <Link
+					href={`mailto:${presentation.mail}`}
+					label={presentation.mail}
+				/> or message me via my social links.
+			</p>
+
+			<SocialLinks />
+		</article>
+	</main>
+</Layout>
