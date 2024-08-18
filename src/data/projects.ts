@@ -10,9 +10,9 @@ export type Experience = {
 	icon: string
 	title: string
 	time: string
-  location: string
+	location: string
 	techs: string[]
-  link: string
+	link: string
 }
 
 const experiences: Experience[] = [
@@ -21,18 +21,18 @@ const experiences: Experience[] = [
 		icon: "/barclays-logo.jpg",
 		title: "Technology Developer Intern",
 		time: "June 2024 - August 2024",
-    location: "Knutsford, United Kingdom",
+		location: "Knutsford, United Kingdom",
 		techs: ["Java", "Spring Boot", "Spark", "AWS", "Docker"],
-    link: "https://www.barclays.co.uk/"
+		link: "https://www.barclays.co.uk/",
 	},
 	{
 		company: "Moka",
 		icon: "/mokahr_logo.jpeg",
 		title: "Frontend Software Engineer Intern",
 		time: "May 2023 - August 2023",
-    location: "Beijing, China",
+		location: "Beijing, China",
 		techs: ["TypeScript / JavaScript", "React", "Redux", "Node.js"],
-    link: "https://mokahr.com/"
+		link: "https://www.mokahr.io/",
 	},
 ]
 
